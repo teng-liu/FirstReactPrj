@@ -101,6 +101,8 @@ class App extends Component {
               </React.Fragment>
             )}/>
             <Route path="/about" component={About} />
+            
+    
           </div>
         </div>
       </Router>
