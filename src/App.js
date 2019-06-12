@@ -7,6 +7,7 @@ import Header from './components/layout/Header';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
 import TryFMA from './components/tryFMA';
+import ProcessStatus from './components/processStatus';
 import axios from 'axios';
 import uuid from 'uuid';
 
@@ -101,8 +102,8 @@ class App extends Component {
                   markComplete={this.markComplete} 
                   delTodo={this.delTodo}/>
               </React.Fragment>
-            )}/>
-            <Route path="/about" component={About} /> */}
+            )}/> */}
+            <Route path="/process" component={ProcessStatus} /> 
             <Route path="/fma" component={TryFMA} />
             
           </div>

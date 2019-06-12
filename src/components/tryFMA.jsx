@@ -28,7 +28,7 @@ export default class TryFMA extends Component {
         this.fsm = new StateMachine({
             init: 'author',
             transitions: [
-                { name: 'prepare', from: 'author', to:'manager' },
+                { name: 'prepareMyStaff', from: 'author', to:'manager' },
                 { name: 'approve', from: 'manager', to:'director' },
                 { name: 'approve', from: 'director', to:'scc' },
                 { name: 'approve', from: 'scc', to:'cfo' },
@@ -44,6 +44,7 @@ export default class TryFMA extends Component {
                 { name: 'complete', from: 'author', to:'author' }
             ],
             methods: {
+              onPrepareMyStaff:     function() { console.log('prepared...')    },
               onMelt:     function() { console.log('I melted')    },
               onFreeze:   function() { console.log('I froze')     },
               onVaporize: function() { console.log('I vaporized') },
@@ -82,8 +83,8 @@ export default class TryFMA extends Component {
         else if(e.target.name === 'conden22'){
             this.fsm.conden22();
         }
-        else if(e.target.name === 'prepare'){
-            this.fsm.prepare();
+        else if(e.target.name === 'prepareMyStaff'){
+            this.fsm.prepareMyStaff();
         }
         else if(e.target.name === 'approve'){
             this.fsm.approve();
