@@ -10,7 +10,35 @@ import TryFMA from './components/tryFMA';
 import ProcessStatus from './components/processStatus';
 import axios from 'axios';
 import uuid from 'uuid';
+import CheckboxTree from 'react-checkbox-tree';
+// import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
+const nodes = [{
+  value: 'mars',
+  label: 'Mars',
+  children: [
+      { value: 'phobos', label: 'Phobos' },
+      { value: 'deimos', label: 'Deimos' },
+  ],
+},
+{
+  value: 'sdf',
+  label: 'Jubter',
+  children: [
+      { value: 'aa', label: 'AAAA' },
+      { value: 'bb', label: 'BBBB' },
+      { value: 'bb', label: 'CCC' },
+  ],
+},
+{
+  value: 'sss',
+  label: 'Tami',
+  children:[]
+}
+
+
+
+];
 
 class App extends Component {
 
@@ -43,7 +71,9 @@ class App extends Component {
 
   //---gona call public API 
   state = {
-    todos: []
+    todos: [],
+    checked: [],
+    expanded: []
   }
 
   componentDidMount() {
@@ -106,6 +136,15 @@ class App extends Component {
             <Route path="/process" component={ProcessStatus} /> 
             <Route path="/fma" component={TryFMA} />
             
+          </div>
+          <div>
+          <CheckboxTree
+                nodes={nodes}
+                checked={this.state.checked}
+                expanded={this.state.expanded}
+                onCheck={checked => this.setState({ checked })}
+                onExpand={expanded => this.setState({ expanded })}
+            />
           </div>
         </div>
       </Router>
