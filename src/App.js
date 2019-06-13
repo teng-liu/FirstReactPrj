@@ -143,7 +143,7 @@ class App extends Component {
                 checked={this.state.checked}
                 expanded={this.state.expanded}
                 onCheck={checked => this.setState({ checked })}
-                onExpand={expanded => this.setState({ expanded })}
+                onExpand={expanded => {this.setState({ expanded }); console.log(this.state);}}
             />
           </div>
         </div>

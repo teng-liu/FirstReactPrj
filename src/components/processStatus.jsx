@@ -3,6 +3,10 @@ import React, { Component } from 'react'
 var StateMachine = require('javascript-state-machine');
 var visualize = require('javascript-state-machine/lib/visualize');
 
+
+//https://github.com/jakesgordon/javascript-state-machine 
+
+
 export default class ProcessStatus extends Component {
 
     componentDidMount() {
@@ -83,31 +87,31 @@ export default class ProcessStatus extends Component {
             ],
             methods: {
               onMelt:     function() { console.log('I melted')    },
-              onContractCorrectionL1:  function() {console.log('by Author')},
-              onContractCorrectionL100:  function() {console.log('by Author')},
-              onContractCorrectionL2:  function() {console.log('by Author')},
-              onContractCorrectionL3:  function() {console.log('by Author')},
-              onContractCorrectionL4:  function() {console.log('by SCC')},
-              onContractCorrectionL5:  function() {console.log('by SCC')},
-              onContractPrepare:  function() {console.log('by Author')},
-              onFinalize:  function() {console.log('by SCC, backup, notification to everyone...')},
-              onLevel1Approve:  function() {console.log('by Manager')},
-              onLevel1Decline:  function() {console.log('by Manager')},
-              onLevel2Approve:  function() {console.log('by Director')},
-              onLevel2Decline:  function() {console.log('by Director')},
-              onLevel3Approve:  function() {console.log('by SCC')},
-              onLevel3Decline:  function() {console.log('by SCC')},
-              onLevel4Approve:  function() {console.log('by CFO')},
-              onLevel4Decline:  function() {console.log('by CFO')},
-              onLevel5Approve:  function() {console.log('by COO')},
-              onLevel5Decline:  function() {console.log('by COO')},
-              onNext:  function() {this.role= "Auto";},
-              onPartASign:  function() {console.log('by Treasury Board')},
-              onPartBacceptTemplate:  function() {console.log('by Vendor')},
-              onPartBSign:  function() {console.log('by Vendor')},
-              onPartBSignDecline:  function() {console.log('by Vendor')},
-              onPreparePartASign:  function() {console.log('by Author')},
-              onPreparePartBSign:  function() {this.role= "Also Author";},
+              onContractCorrectionL1:  function() {this.role = "Author"},
+              onContractCorrectionL100:  function() {this.role = "Author"},
+              onContractCorrectionL2:  function() {this.role = "Author"},
+              onContractCorrectionL3:  function() {this.role = "Author"},
+              onContractCorrectionL4:  function() {this.role = "SCC"},
+              onContractCorrectionL5:  function() {this.role = "SCC"},
+              onContractPrepare:  function() {this.role = "Author"},
+              onFinalize:  function() {this.role = "SCC"},
+              onLevel1Approve:  function() {this.role = "Manager";},
+              onLevel1Decline:  function() {this.role = "Manager"},
+              onLevel2Approve:  function() {this.role = "Director"},
+              onLevel2Decline:  function() {this.role = "Director"},
+              onLevel3Approve:  function() {this.role = "SCC"},
+              onLevel3Decline:  function() {this.role = "SCC"},
+              onLevel4Approve:  function() {this.role = "CFO"},
+              onLevel4Decline:  function() {this.role = "CFO"},
+              onLevel5Approve:  function() {this.role = "COO"},
+              onLevel5Decline:  function() {this.role = "COO"},
+              onNext:  function() {this.role= "move to next state Automatically";},
+              onPartASign:  function() {this.role= "Treasury Board";},
+              onPartBacceptTemplate:  function() {this.role = "Vendor"},
+              onPartBSign:  function() {this.role = "Vendor"},
+              onPartBSignDecline:  function() {this.role = "Vendor"},
+              onPreparePartASign:  function() {this.role = "Author"},
+              onPreparePartBSign:  function() {this.role= "Author";},
               onTemplatePrepare:  function() {this.role= "Author"; }
 
 
@@ -164,7 +168,8 @@ export default class ProcessStatus extends Component {
         else if(e.target.name === 'templatePrepare') { this.fsm.templatePrepare(); }
 
         console.log("changed to => ", this.fsm.state);
-        let trans = this.fsm.transitions().map((t) => {return (<div>{t}</div>)});
+        // let trans = this.fsm.transitions().map((t) => {return (<div>{t}</div>)});
+        let trans = this.fsm.transitions();
         this.setState({data: this.fsm.state});
         this.setState({trans: trans});
         this.setState({role: this.fsm.role});
@@ -186,15 +191,33 @@ export default class ProcessStatus extends Component {
             })
         }
 
+        let possibles;
+        if(this.state) {
+            if(this.state.trans) {
+                possibles = this.state.trans.map((s) => {
+                    console.log(this.state.trans);
+                    return (
+                        <div>
+                            <input type="button" value={s} name={s} onClick={(e)=>this.onEvent(e)}></input>
+                        </div>
+                    )
+                })
+            }
+
+        }
+
+
         if(this.state && this.state.trans){
             return(            
             <div>
-                <div style={current}>Current State  >>>>>  {this.state.data}  >>> by role: {this.state.role}</div>
+                <div style={current}>Current State >>> {this.state.data}  >>>  by role: {this.state.role}</div>
                 
-                <div>
-                    Possible next State:
-                    <div style={possi}>{this.state.trans}</div>
+                <div style={possi}>
+                    =========Possible Action(s):
+                    {/* <div style={possi}>{this.state.trans}</div> */}
+                    {possibles}
                 </div>
+                <div>=========All Actions=============================</div>
                 {items}
             </div>)
         }
@@ -212,9 +235,12 @@ export default class ProcessStatus extends Component {
 const possi = {
     backgroundColor: '#f4f4f4',
     margin: '5px 10px',
+    fontSize: 20,
 }
 
 const current = {
     backgroundColor: '#f4e842',
+    fontSize: 20,
+    margin: 5,
 }
 
