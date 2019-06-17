@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 var StateMachine = require('javascript-state-machine');
 var visualize = require('javascript-state-machine/lib/visualize');
 
+// http://www.webgraphviz.com/
 
 //https://github.com/jakesgordon/javascript-state-machine 
 
@@ -121,9 +122,10 @@ export default class ProcessStatus extends Component {
             }
           });
 
-        //   if(this.fsm) {
-        //     visualize(this.fsm);
-        //   }
+          if(this.fsm) {
+            this.graphdot = visualize(this.fsm);
+            console.log(this.graphdot);
+          }
           
 
         this.state = {data:  " ", role: " ", trans: " "};

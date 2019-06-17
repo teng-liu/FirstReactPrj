@@ -11,7 +11,26 @@ import ProcessStatus from './components/processStatus';
 import axios from 'axios';
 import uuid from 'uuid';
 import CheckboxTree from 'react-checkbox-tree';
+// import { Graphviz } from 'graphviz-react';
 // import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+
+// const Viz = require('viz.js');
+// const { Module, render } = require('viz.js/full.render.js');
+
+// let viz = new Viz({ Module, render });
+
+// viz.renderString('digraph { a -> b }')
+//   .then(result => {
+//     console.log(result);
+//   })
+//   .catch(error => {
+//     // Create a new Viz instance (@see Caveats page for more info)
+//     viz = new Viz({ Module, render });
+
+//     // Possibly display the error
+//     console.error(error);
+//   });
+
 
 const nodes = [{
   value: 'mars',
@@ -145,6 +164,15 @@ class App extends Component {
                 onCheck={checked => this.setState({ checked })}
                 onExpand={expanded => {this.setState({ expanded }); console.log(this.state);}}
             />
+          </div>
+          <div>
+            {/* <Graphviz dot={`graph {
+              grandparent -- "parent A";
+              child;
+              "parent B" -- child;
+              grandparent --  "parent B";
+            }`}></Graphviz> */}
+
           </div>
         </div>
       </Router>

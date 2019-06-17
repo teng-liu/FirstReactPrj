@@ -5,12 +5,14 @@
   "dependencies": {
     "@microsoft/office-js": "^1.1.18",
     "axios": "^0.18.0",
+    "graphviz-react": "^1.0.4",
     "react": "^16.8.6",
     "react-checkbox-tree": "^1.5.1",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "viz": "0.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
