@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@microsoft/office-js": "^1.1.18",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "graphviz-react": "^1.0.4",
     "react": "^16.8.6",
     "react-checkbox-tree": "^1.5.1",
